@@ -12,5 +12,6 @@
 */
 //develop branch 
 Route::get('/', function () {
-    return view('welcome');
+    return "Api is running";
 });
+Route::post('auth/register','AuthController@register');
