@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +16,10 @@
 Route::get('/', function () {
     return "Api is running";
 });
-Route::post('auth/register','AuthController@register');
+//Route::post('auth/register','Auth\RegisterController@register');
+Route::group(['prefix'=>'auth'],function()
+{
+	Route::resource('register','Auth\AuthenticateController', ['only' => ['index']]);
+	Route::post('register', 'Auth\AuthenticateController@authenticate');
+});
+
