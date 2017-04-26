@@ -14,12 +14,14 @@ header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 */
 //develop branch 
 Route::get('/', function () {
-    return "Api is running";
+    return "Api is running yup";
 });
 //Route::post('auth/register','Auth\RegisterController@register');
-Route::group(['prefix'=>'auth'],function()
-{
-	Route::resource('register','Auth\AuthenticateController', ['only' => ['index']]);
-	Route::post('register', 'Auth\AuthenticateController@authenticate');
-});
+// Route::group(['prefix'=>'auth'],function()
+// {
+// 	Route::resource('register','Auth\AuthenticateController', ['only' => ['index']]);
+// 	Route::post('register', 'Auth\AuthenticateController@authenticate');
+// });
+//Route::controller('auth','Auth\AuthenticateController');
+Route::post('auth/register','Auth\RegisterController@postRegister');
 

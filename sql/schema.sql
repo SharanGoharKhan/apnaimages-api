@@ -4,6 +4,8 @@ create table users(
 	last_name varchar(30) not null,
 	email varchar(255) not null,
 	password text not null,
+	access_token text not null,
+	token_expired datetime not null,
 	deleted_at datetime,
 	updated_at datetime,
 	created_at timestamp default current_timestamp 

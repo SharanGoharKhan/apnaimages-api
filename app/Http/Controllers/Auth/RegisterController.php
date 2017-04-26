@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
+use App\Models\User;
 class RegisterController extends Controller
 {
     /*
@@ -68,8 +69,17 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-    public function postRegister()
+    public function postRegister(Request $request)
     {
-        dd("Register called");
+        $email=$request->input('email');
+        $user = User::whereEmail($email)->first();
+        if(!$user){
+            $user = User::create($request->all());
+        }
+        else
+        {
+            \App::abort('403','Email already exists');
+        }
+        return $user;
     }
 }
